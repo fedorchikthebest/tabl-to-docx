@@ -22,15 +22,16 @@ def render_shablons(csv_path, save_path):
     row_num = 2
     
     while sheet_obj.cell(row = row_num, column = 1).value is not None:
-        contexts = [sheet_obj.cell(row_num, i).value for i in range(1, 9)]
+        contexts = [sheet_obj.cell(row_num, i).value for i in range(1, 10)]
         context = {'name' : contexts[0],
                 'born_date' : contexts[1],
                 'attes_num' : contexts[2],
                 'start_date' : contexts[3],
                 'stop_date' : contexts[4],
-                'oblast' : contexts[5],
-                'a_class' : classes[int(contexts[6]) - 1],
-                'num' : contexts[7]}
+                'a_class' : classes[int(contexts[5]) - 1],
+                'num' : contexts[6],
+                'email': contexts[7],
+                'company': contexts[8]}
 
         doc.render(context)
         doc.save(f"{save_path}\\{row_num}.docx")
