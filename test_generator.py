@@ -37,10 +37,10 @@ def render_shablons(csv_path, save_path):
                 'reshenie_date': contexts[10]}
 
         doc.render(context)
-        doc.save(f"{save_path}\\{context['name']}_{context['num']}_{row_num}.docx")
+        doc.save(f"{save_path}\\{context['num']}_{row_num}.docx")
         
         doc_reshenie.render(context)
-        doc_reshenie.save(f"{save_path}\\reshenie_{context['name']}_{context['num']}_{row_num}.docx")
+        doc_reshenie.save(f"{save_path}\\reshenie_{context['num']}_{row_num}.docx")
         
         row_num += 1
 
