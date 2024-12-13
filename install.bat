@@ -1,6 +1,6 @@
 @echo off
-python -m ensurepip
-python -m pip install openpyxl
-python -m pip install docxtpl
+py -m ensurepip
+py -m pip install openpyxl
+py -m pip install docxtpl
 echo Всё установилось, иожно закрывать
 pause
