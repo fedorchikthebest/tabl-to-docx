@@ -5,7 +5,7 @@ import os
 
 
 def to_kavichki(text:str) -> str:
-    while "\"" in text:
+    while '"' in text:
         text = text.replace('"', "«", 1)
         text = text[::-1].replace('"', "»", 1)[::-1]
     return text
