@@ -3,6 +3,7 @@ from openpyxl import load_workbook
 import docx
 from docx2pdf import convert
 import os
+from sendmail import send_mail
 
 
 def to_kavichki(text:str) -> str:
@@ -44,18 +45,22 @@ def render_shablons(csv_path, save_path):
                 'reshenie_date': contexts[6],
                 'company': to_kavichki(contexts[7]),
                 'email': to_kavichki(contexts[8])}
+        
+        reshenie_name = f"{save_path}\\reshenie{context['attes_num']}_{row_num}.pdf"
+        docx_name = f"{save_path}\\{context['attes_num']}_{row_num}"
 
         doc.render(context)
-        doc.save(f"{save_path}\\{context['attes_num']}_{row_num}.docx")
+        doc.save(f"{docx_name}.docx")
         
-        doc = docx.Document(f"{save_path}\\{context['attes_num']}_{row_num}.docx")
-        doc.save(f"{save_path}\\{context['attes_num']}_{row_num}.doc")
-        os.remove(f"{save_path}\\{context['attes_num']}_{row_num}.docx")
+        doc = docx.Document(f"{docx_name}.docx")
+        doc.save(f"{docx_name}.doc")
+        os.remove(f"{docx_name}.docx")
         
         doc_reshenie.render(context)
-        doc_reshenie.save(f"{save_path}\\reshenie{context['attes_num']}_{row_num}.docx")
-        convert(f"{save_path}\\reshenie{context['attes_num']}_{row_num}.docx", f"{save_path}\\reshenie{context['attes_num']}_{row_num}.pdf")
-        os.remove(f"{save_path}\\reshenie{context['attes_num']}_{row_num}.docx")
+        doc_reshenie.save(f"{reshenie_name}.docx")
+        convert(f"{reshenie_name}.docx", f"{reshenie_name}.pdf")
+        os.remove(f"{reshenie_name}.docx")
+        send_mail(context['email'], "Решение", f"{reshenie_name}.pdf")
         
         
         row_num += 1

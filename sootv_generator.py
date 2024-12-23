@@ -2,6 +2,7 @@ from docxtpl import DocxTemplate
 from openpyxl import load_workbook
 from docx2pdf import convert
 import os
+from sendmail import send_mail
 
 
 def to_kavichki(text:str) -> str:
@@ -36,13 +37,15 @@ def render_shablons(csv_path, save_path):
         context = {'company' : to_kavichki(contexts[0]),
                 'name' : contexts[1],
                 'num' :  to_kavichki(contexts[2]),
-                'a_class' : classes[int(contexts[3]) - 1]}
+                'a_class' : classes[int(contexts[3]) - 1],
+                "email": contexts[4]}
 
         doc.render(context)
         doc.save(f"{save_path}\\{context['num']}_{row_num}.docx")
         
         convert(f"{save_path}\\{context['num']}_{row_num}.docx", f"{save_path}\\{context['num']}_{row_num}.pdf")
-        os.remove(f"{save_path}\\{context['num']}_{row_num}.docx")       
+        os.remove(f"{save_path}\\{context['num']}_{row_num}.docx")
+        send_mail(context['email'], "Решение соответствие", f"{save_path}\\{context['num']}_{row_num}.pdf")    
         
         row_num += 1
 
