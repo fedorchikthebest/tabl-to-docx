@@ -60,7 +60,10 @@ def render_shablons(csv_path, save_path):
         doc_reshenie.save(f"{reshenie_name}.docx")
         convert(f"{reshenie_name}.docx", f"{reshenie_name}.pdf")
         os.remove(f"{reshenie_name}.docx")
-        send_mail(context['email'], "Решение", f"{reshenie_name}.pdf")
+        try:
+            send_mail(context['email'], "Решение", f"{reshenie_name}.pdf")
+        except Exception:
+            print('Не удалось отправить письмо', context['email'])
         
         
         row_num += 1

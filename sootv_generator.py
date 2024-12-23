@@ -45,7 +45,11 @@ def render_shablons(csv_path, save_path):
         
         convert(f"{save_path}\\{context['num']}_{row_num}.docx", f"{save_path}\\{context['num']}_{row_num}.pdf")
         os.remove(f"{save_path}\\{context['num']}_{row_num}.docx")
-        send_mail(context['email'], "Решение соответствие", f"{save_path}\\{context['num']}_{row_num}.pdf")    
+        
+        try:
+            send_mail(context['email'], "Решение соответствие", f"{save_path}\\{context['num']}_{row_num}.pdf")    
+        except Exception:
+            print('Не удалось отправить письмо', context['email'])
         
         row_num += 1
 
