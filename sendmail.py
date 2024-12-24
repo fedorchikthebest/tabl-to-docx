@@ -12,7 +12,7 @@ def send_mail(mail, header, filename):
     msg = email.mime.multipart.MIMEMultipart()
     msg['Subject'] = header
     msg['From'] = 'at@cdtb.net.ru'
-    msg['To'] = 'gimonchik@gimonchik.ru'
+    msg['To'] = mail
 
     # PDF attachment
     fp=open(filename,'rb')
