@@ -5,6 +5,9 @@ __pycache__/
 
 # C extensions
 *.so
+result/*.pdf
+result/*.docx
+sootv/*.pdf
 
 # Distribution / packaging
 .Python

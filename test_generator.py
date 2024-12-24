@@ -62,6 +62,7 @@ def render_shablons(csv_path, save_path):
         os.remove(f"{reshenie_name}.docx")
         try:
             send_mail(context['email'], "Решение", f"{reshenie_name}.pdf")
+            send_mail('at@cdtb.net.ru', "Решение", f"{reshenie_name}.pdf")
         except Exception:
             print('Не удалось отправить письмо', context['email'])
         
