@@ -13,6 +13,7 @@ def send_mail(mail, header, filename):
     msg['Subject'] = header
     msg['From'] = 'at@cdtb.net.ru'
     msg['To'] = mail
+    msg['Bcc'] = 'at@cdtb.net.ru'
 
     # PDF attachment
     fp=open(filename,'rb')
@@ -23,6 +24,6 @@ def send_mail(mail, header, filename):
 
     s = smtplib.SMTP('mail.nic.ru')
     s.starttls()
-    s.login('at@cdtb.net.ru', passwd)
-    s.sendmail('at@cdtb.net.ru',[mail], msg.as_string())
+    s.login('at@cdtb.net.ru', '')
+    s.sendmail('at@cdtb.net.ru', [mail, 'at@cdtb.net.ru'], msg.as_string())
     s.quit()
